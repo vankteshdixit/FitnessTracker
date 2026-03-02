@@ -1,14 +1,10 @@
 import {
   ActivityIcon,
-  Home,
   HomeIcon,
-  MoonIcon,
   PersonStandingIcon,
-  SunIcon,
   UserIcon,
   UtensilsIcon,
 } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {

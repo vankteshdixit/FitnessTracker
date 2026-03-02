@@ -106,7 +106,7 @@ const FoodLog = () => {
 
   /* ---------------- DELETE ENTRY ---------------- */
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number | string) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this entry?"
     );

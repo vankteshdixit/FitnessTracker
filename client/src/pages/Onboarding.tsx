@@ -9,10 +9,9 @@ import {
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useAppContext } from "../context/AppContext";
-import type { ProfileFormData, UserData } from "../types";
+import type { ProfileFormData } from "../types";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
-import mockApi from "../assets/mockApi";
 import api from "../configs/api";
 
 const Onboarding = () => {
@@ -70,7 +69,7 @@ const Onboarding = () => {
       } catch (error:any) {
         toast.error(error.message)
       }
-      
+
     }
   };
 

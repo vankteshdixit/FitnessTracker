@@ -52,8 +52,10 @@ export interface FormData {
 }
 
 // Food Entry
+// Replace lines 55-64
+// Food Entry
 export interface FoodEntry {
-    _id: Key | null | undefined;
+    _id?: string | number | null;
     id: number | string;
     name: string;
     calories: number;

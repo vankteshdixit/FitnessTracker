@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 const Profile = () => {
   const {
     user,
-    setUser,
+    fetchUser,
     logout,
     allFoodLogs,
     allActivityLogs,
@@ -113,7 +113,7 @@ const Profile = () => {
     toast.error(error?.message || "Failed to update profile");
   }
 
-  setIsEditing(false)
+  setShowEdit(false)
 }
 
   /* ---------- AVATAR ---------- */
@@ -562,10 +562,10 @@ const Input = ({ label, value, onChange }: any) => (
   </div>
 );
 
-function fetchUser(arg0: string) {
-  throw new Error("Function not implemented.");
-}
-function setIsEditing(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
+// function fetchUser(arg0: string) {
+//   throw new Error("Function not implemented.");
+// }
+// function setIsEditing(arg0: boolean) {
+//   throw new Error("Function not implemented.");
+// }
 

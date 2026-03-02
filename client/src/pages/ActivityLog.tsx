@@ -45,33 +45,33 @@ export const ActivityLog = () => {
 
   // Submit Activity
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
+    e.preventDefault()
 
-  if (!formData.name.trim() || formData.duration <= 0) {
-    return toast('Please enter valid data')
+    if (!formData.name.trim() || formData.duration <= 0) {
+      return toast('Please enter valid data')
+    }
+
+    try {
+      const { data } = await api.post('/api/activity-logs', { data: formData })
+
+
+      setAllActivityLogs(prev => [...prev, data])
+      setFormData({ name: '', duration: 0, calories: 0 })
+      setShowForm(false)
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error?.response?.data?.error?.message || error?.message);
+    }
   }
-
-  try {
-    const {data} = await api.post('/api/activity-logs',{data: formData})
-
-
-    setAllActivityLogs(prev => [...prev, data])
-    setFormData({ name: '', duration: 0, calories: 0 })
-    setShowForm(false)
-  } catch (error: any) {
-    console.log(error);
-    toast.error(error?.response?.data?.error?.message || error?.message);
-  }
-}
 
   // Delete Activity
-  const handleDelete = async (documentId:string) => {
+  const handleDelete = async (documentId: string) => {
     try {
-      const confirm=window.confirm('Are you sure you want to delete this entry?')
-      if(!confirm) return;
+      const confirm = window.confirm('Are you sure you want to delete this entry?')
+      if (!confirm) return;
       await api.delete(`/api/activity-logs/${documentId}`);
-      setAllActivityLogs(prev => prev.filter((a)=>a.documentId !== documentId))
-    } catch (error:any) {
+      setAllActivityLogs(prev => prev.filter((a) => a.documentId !== documentId))
+    } catch (error: any) {
       console.log(error);
       toast.error(error?.response?.data?.error?.message || error?.message);
 
@@ -247,7 +247,7 @@ export const ActivityLog = () => {
               <div className="space-y-3">
                 {activities.map((activity, index) => (
                   <div
-                    key={activity._id ?? index}
+                    key={activity.documentId ?? index}
                     className="flex items-center justify-between px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-800"
                   >
                     <div>
@@ -266,8 +266,8 @@ export const ActivityLog = () => {
 
                       <button
                         onClick={() =>
-                          activity._id &&
-                          handleDelete(activity._id)
+                          activity.documentId &&
+                          handleDelete(activity.documentId)
                         }
                         className="text-red-500 hover:text-red-400 transition"
                       >

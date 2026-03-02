@@ -8,7 +8,6 @@ import {
   Activity,
   FlameIcon,
   HamburgerIcon,
-  Ruler,
   ScaleIcon,
   TrendingUpIcon,
   ZapIcon,
