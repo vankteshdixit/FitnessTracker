@@ -1,5 +1,6 @@
 // User
 export type User = {
+    avatar: string;
     id: string;
     email: string;
     username: string;
@@ -52,6 +53,7 @@ export interface FormData {
 
 // Food Entry
 export interface FoodEntry {
+    _id: Key | null | undefined;
     id: number | string;
     name: string;
     calories: number;

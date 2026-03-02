@@ -13,6 +13,7 @@ import type { ProfileFormData, UserData } from "../types";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import mockApi from "../assets/mockApi";
+import api from "../configs/api";
 
 const Onboarding = () => {
   const [step, setStep] = useState(1);
@@ -61,14 +62,15 @@ const Onboarding = () => {
 
       localStorage.setItem("fitnesUser", JSON.stringify(userData));
 
-      await mockApi.user.update(
-        user?.id || "",
-        userData as unknown as Partial<UserData>
-      );
-
-      toast.success("Profile setup completed!");
-      setOnboardingCompleted(true);
-      fetchUser(user?.token || "");
+      try {
+        await api.put(`/api/users/${user?.id}`, userData)
+        toast.success("Profile setup completed!");
+        setOnboardingCompleted(true);
+        fetchUser(user?.token || "");
+      } catch (error:any) {
+        toast.error(error.message)
+      }
+      
     }
   };
 
@@ -250,8 +252,8 @@ const Onboarding = () => {
                         }));
                       }}
                       className={`w-full text-left px-5 py-4 rounded-xl border transition-all duration-200 ${formData.goal === option.value
-                          ? "bg-emerald-500 text-white border-emerald-400 ring-2 ring-emerald-500"
-                          : "bg-slate-800 border-slate-700 hover:border-emerald-400"
+                        ? "bg-emerald-500 text-white border-emerald-400 ring-2 ring-emerald-500"
+                        : "bg-slate-800 border-slate-700 hover:border-emerald-400"
                         }`}
                     >
                       <span className="text-base font-medium">
